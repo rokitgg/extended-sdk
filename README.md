@@ -10,6 +10,25 @@ Unofficial TypeScript SDK for the Extended Exchange API.
 - 📦 **Tree-shakable**: Only import what you need
 - 🧪 **Well-tested**: Comprehensive test suite with real API integration
 
+## 🚀 Development Status
+
+This SDK is currently in **active development**! We've completed all public info endpoints and are working on additional features. We welcome contributions from the open source community to help make this SDK even better.
+
+**✅ Completed:**
+- All public info endpoints (markets, stats, order book, trades, candles, funding, open interest)
+- Comprehensive TypeScript types and Zod validation
+- Full test coverage with real API integration
+
+**🔄 In Progress:**
+- Additional features and improvements
+- Performance optimizations
+- Enhanced error handling
+
+**📋 Planned:**
+- Private endpoints support
+- WebSocket transport for real-time data
+- Additional utility functions
+
 ## Installation
 
 ```bash
@@ -187,6 +206,36 @@ import {
   HttpRequestError,
   TransportError
 } from "@rokitgg/extended/errors";
+```
+
+## 🤝 Contributing
+
+We love contributions from the open source community! This SDK is actively under development and we welcome:
+
+- 🐛 **Bug fixes** and improvements
+- ✨ **New features** and API endpoint support
+- 📚 **Documentation** improvements
+- 🧪 **Test coverage** enhancements
+- 🔧 **Code quality** improvements
+
+### Getting Started
+
+1. **Fork the repository** on GitHub
+2. **Clone your fork** and set up the development environment
+3. **Create a feature branch** for your changes
+4. **Make your changes** following our coding standards
+5. **Run tests** to ensure everything works
+6. **Submit a pull request** with a clear description
+
+For detailed contribution guidelines, see our [CONTRIBUTING.md](CONTRIBUTING.md) file.
+
+### Development Setup
+
+```bash
+git clone https://github.com/rokitgg/extended-sdk.git
+cd extended-sdk/packages/sdk
+pnpm install
+pnpm test  # Run tests to verify setup
 ```
 
 ## Development
