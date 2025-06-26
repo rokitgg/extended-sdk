@@ -10,27 +10,6 @@ Unofficial TypeScript SDK for the Extended Exchange API.
 - 📦 **Tree-shakable**: Only import what you need
 - 🧪 **Well-tested**: Comprehensive test suite with real API integration
 
-## 🚀 Development Status
-
-This SDK is currently in **active development**! 
-
-Contributions from the open source community are welcomed to help make this SDK even better.
-
-**✅ Completed:**
-- All public info endpoints (markets, stats, order book, trades, candles, funding, open interest)
-- Comprehensive TypeScript types and Zod validation
-- Full test coverage with real API integration
-
-**🔄 In Progress:**
-- Additional features and improvements
-- Performance optimizations
-- Enhanced error handling
-
-**📋 Planned:**
-- Private endpoints support
-- WebSocket transport for real-time data
-- Additional utility functions
-
 ## Installation
 
 ```bash
