@@ -12,7 +12,9 @@ Unofficial TypeScript SDK for the Extended Exchange API.
 
 ## 🚀 Development Status
 
-This SDK is currently in **active development**! We've completed all public info endpoints and are working on additional features. We welcome contributions from the open source community to help make this SDK even better.
+This SDK is currently in **active development**! 
+
+Contributions from the open source community are welcomed to help make this SDK even better.
 
 **✅ Completed:**
 - All public info endpoints (markets, stats, order book, trades, candles, funding, open interest)
