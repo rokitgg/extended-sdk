@@ -1,0 +1,80 @@
+{
+  "name": "@rokitgg/extended",
+  "version": "0.0.1",
+  "description": "Unofficial Extended API SDK",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/rokitgg/extended-sdk#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rokitgg/extended-sdk",
+    "directory": "packages/sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/rokitgg/extended-sdk/issues"
+  },
+  "keywords": [
+    "extended",
+    "exchange",
+    "api",
+    "sdk",
+    "typescript",
+    "crypto",
+    "trading"
+  ],
+  "scripts": {
+    "build": "unbuild --clean",
+    "lint": "biome check .",
+    "lint:fix": "biome check . --write",
+    "format": "biome format --write .",
+    "test": "vitest run"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./transports": {
+      "types": "./dist/transports/index.d.ts",
+      "import": "./dist/transports/index.mjs",
+      "require": "./dist/transports/index.cjs"
+    },
+    "./clients": {
+      "types": "./dist/clients/index.d.ts",
+      "import": "./dist/clients/index.mjs",
+      "require": "./dist/clients/index.cjs"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.mjs",
+      "require": "./dist/types/index.cjs"
+    },
+    "./errors": {
+      "types": "./dist/errors/index.d.ts",
+      "import": "./dist/errors/index.mjs",
+      "require": "./dist/errors/index.cjs"
+    },
+    "./schemas": {
+      "types": "./dist/schemas/index.d.ts",
+      "import": "./dist/schemas/index.mjs",
+      "require": "./dist/schemas/index.cjs"
+    }
+  },
+  "dependencies": {
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "24.0.3",
+    "typescript": "^5.8.3",
+    "unbuild": "^3.5.0",
+    "vitest": "^3.2.0"
+  },
+  "files": [
+    "dist"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"target": "ES2022",
+		"lib": ["ES2022", "DOM"],
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"module": "Preserve",
+		"noEmit": true,
+
+		"moduleResolution": "Bundler",
+		"moduleDetection": "force",
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"composite": false,
+		"incremental": true,
+		"tsBuildInfoFile": ".tsbuildinfo",
+		"strict": true,
+		"noImplicitOverride": true,
+		"noFallthroughCasesInSwitch": true,
+		"downlevelIteration": true
+	},
+	"exclude": ["**/dist", "node_modules"],
+	"references": [],
+	"include": ["src"]
+}

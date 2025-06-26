@@ -1,84 +1,223 @@
-# Turborepo starter
+# Extended API SDK
 
-This Turborepo starter is maintained by the Turborepo core team.
+Unofficial TypeScript SDK for the Extended Exchange API.
 
-## Using this example
+## Features
 
-Run the following command:
+- 🔒 **Type-safe**: Full TypeScript support with comprehensive type definitions
+- 🛡️ **Runtime validation**: Zod schemas for all API responses
+- 🚀 **Modern**: Built with modern JavaScript/TypeScript tooling
+- 📦 **Tree-shakable**: Only import what you need
+- 🧪 **Well-tested**: Comprehensive test suite with real API integration
 
-```sh
-npx create-turbo@latest
+## Installation
+
+```bash
+npm install @rokitgg/extended
+# or
+pnpm add @rokitgg/extended
+# or
+yarn add @rokitgg/extended
 ```
 
-## What's inside?
+## Quick Start
 
-This Turborepo includes the following packages/apps:
+### Basic Usage
 
-### Apps and Packages
+```ts
+import { HttpTransport } from "@rokitgg/extended/transports";
+import { InfoClient } from "@rokitgg/extended/clients";
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+const transport = new HttpTransport();
+const infoClient = new InfoClient({ transport });
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+// Get all markets
+const allMarkets = await infoClient.markets();
 
-### Utilities
+// Get specific market (using query parameters)
+const btcMarket = await infoClient.markets({ market: "BTC-USD" });
 
-This Turborepo has some additional tools already setup for you:
+// Get multiple markets (using query parameters)
+const markets = await infoClient.markets({ market: ["BTC-USD", "ETH-USD"] });
+```
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### Market Statistics
+
+```ts
+// Get market statistics
+const stats = await infoClient.marketStats("BTC-USD");
+console.log(stats.lastPrice); // Last traded price
+console.log(stats.volume24h); // 24-hour volume
+console.log(stats.fundingRate); // Current funding rate
+```
+
+### Order Book
+
+```ts
+// Get market order book
+const orderBook = await infoClient.marketOrderBook("BTC-USD");
+console.log(orderBook.bid); // Array of bid orders
+console.log(orderBook.ask); // Array of ask orders
+```
+
+### Recent Trades
+
+```ts
+// Get recent trades
+const trades = await infoClient.marketTrades("BTC-USD");
+console.log(trades[0].p); // Trade price
+console.log(trades[0].q); // Trade quantity
+console.log(trades[0].S); // Trade side (BUY/SELL)
+```
+
+### Candles History
+
+```ts
+// Get candles history
+const candles = await infoClient.candles("BTC-USD", "trades", "1m", 1000);
+console.log(candles[0].o); // Open price
+console.log(candles[0].h); // High price
+console.log(candles[0].l); // Low price
+console.log(candles[0].c); // Close price
+console.log(candles[0].v); // Volume
+```
+
+### Funding History
+
+```ts
+// Get funding history
+const endTime = Date.now();
+const startTime = endTime - 7 * 24 * 60 * 60 * 1000; // 7 days ago
+
+const fundingHistory = await infoClient.funding("BTC-USD", startTime, endTime);
+console.log(fundingHistory.data); // Array of funding rates
+console.log(fundingHistory.pagination); // Pagination info
+```
+
+### Open Interest History
+
+```ts
+// Get open interest history
+const endTime = Date.now();
+const startTime = endTime - 7 * 24 * 60 * 60 * 1000; // 7 days ago
+
+const openInterest = await infoClient.openInterest("BTC-USD", "P1D", startTime, endTime);
+console.log(openInterest[0].i); // Open interest in USD
+console.log(openInterest[0].I); // Open interest in synthetic asset
+console.log(openInterest[0].t); // Timestamp
+```
+
+## API Reference
+
+### Transports
+
+#### HttpTransport
+
+The HTTP transport for making REST API calls.
+
+```ts
+import { HttpTransport } from "@rokitgg/extended/transports";
+
+const transport = new HttpTransport({
+  isTestnet: false, // Use testnet API
+  timeout: 10000, // Request timeout in ms
+});
+```
+
+### Clients
+
+#### InfoClient
+
+Client for accessing public market information.
+
+```ts
+import { InfoClient } from "@rokitgg/extended/clients";
+
+const client = new InfoClient({ transport });
+
+// Available methods:
+await client.markets(); // Get all markets
+await client.marketStats("BTC-USD"); // Get market statistics
+await client.marketOrderBook("BTC-USD"); // Get order book
+await client.marketTrades("BTC-USD"); // Get recent trades
+await client.candles("BTC-USD", "trades", "1m", 1000); // Get candles
+await client.funding("BTC-USD", startTime, endTime); // Get funding history
+await client.openInterest("BTC-USD", "P1D", startTime, endTime); // Get open interest
+```
+
+### Types
+
+All TypeScript types are available for import:
+
+```ts
+import type { 
+  ExtendedMarketData,
+  MarketStats,
+  MarketOrderBook,
+  MarketTrade,
+  Candle,
+  FundingRate,
+  OpenInterest
+} from "@rokitgg/extended/types";
+```
+
+### Schemas
+
+Zod schemas for runtime validation:
+
+```ts
+import { 
+  ExtendedMarketDataSchema,
+  MarketStatsSchema,
+  MarketOrderBookSchema,
+  MarketTradeSchema,
+  CandleSchema,
+  FundingRateSchema,
+  OpenInterestSchema
+} from "@rokitgg/extended/schemas";
+```
+
+### Errors
+
+Error classes for handling API errors:
+
+```ts
+import { 
+  InvalidInputError,
+  HttpRequestError,
+  TransportError
+} from "@rokitgg/extended/errors";
+```
+
+## Development
+
+### Setup
+
+```bash
+git clone https://github.com/rokitgg/extended-sdk.git
+cd extended-sdk/packages/sdk
+pnpm install
+```
 
 ### Build
 
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
+```bash
 pnpm build
 ```
 
-### Develop
+### Test
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
+```bash
+pnpm test
 ```
 
-### Remote Caching
+### Lint
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+```bash
+pnpm lint
+pnpm lint:fix
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## License
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+MIT
