@@ -1,6 +1,9 @@
 # Extended API SDK
 
-Unofficial TypeScript SDK for the Extended Exchange API.
+Unofficial [Extended API](https://api.docs.extended.exchange/) SDK for all major JS runtimes, written in TypeScript and provided with tests.
+
+This package has been heavily inspired by the, also unofficial, [Hyperliquid API SDK](https://github.com/nktkas/hyperliquid) by [@nktkas](https://github.com/nktkas)
+
 
 ## Features
 
