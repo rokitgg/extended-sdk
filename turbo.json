@@ -26,9 +26,9 @@
         "^format"
       ]
     },
-    "check-types": {
+    "typecheck": {
       "dependsOn": [
-        "^check-types"
+        "^typecheck"
       ]
     },
     "dev": {
